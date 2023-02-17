@@ -39,6 +39,11 @@ let romanToInt = (s: string): number => {
         switch (s[i]) {
 
             case "I": {
+                if (!hashTable[s[i]]) {
+                    hashTable[s[i]] = 1
+                } else {
+                    hashTable[s[i]] += 1
+                }
                 break;
             }
             case "V": {
@@ -46,8 +51,13 @@ let romanToInt = (s: string): number => {
                     result += 4
                     delete hashTable[s[i - 1]];
                 } else {
-                    hashTable[s[i]] += 1
+                    if (!hashTable[s[i]]) {
+                        hashTable[s[i]] = 1
+                    } else {
+                        hashTable[s[i]] += 1
+                    }
                 }
+                // console.log(hashTable)
                 break;
             }
             case "X": {
@@ -55,8 +65,11 @@ let romanToInt = (s: string): number => {
                     result += 9
                     delete hashTable[s[i - 1]];
                 } else {
-                    hashTable[s[i]] += 1
-                    // console.log(hashTable)
+                    if (!hashTable[s[i]]) {
+                        hashTable[s[i]] = 1
+                    } else {
+                        hashTable[s[i]] += 1
+                    }
                 }
                 break;
             }
@@ -65,7 +78,11 @@ let romanToInt = (s: string): number => {
                     result += 40
                     delete hashTable[s[i - 1]];
                 } else {
-                    hashTable[s[i]] += 1
+                    if (!hashTable[s[i]]) {
+                        hashTable[s[i]] = 1
+                    } else {
+                        hashTable[s[i]] += 1
+                    }
                 }
                 break;
             }
@@ -74,13 +91,13 @@ let romanToInt = (s: string): number => {
                     result += 90
                     delete hashTable[s[i - 1]];
                 } else {
-                    if(!hashTable[s[i]]){
+                    if (!hashTable[s[i]]) {
                         hashTable[s[i]] = 1
                     } else {
                         hashTable[s[i]] += 1
                     }
-                    
-                    console.log(hashTable)
+
+                    // console.log(hashTable)
                 }
                 break;
             }
@@ -89,8 +106,12 @@ let romanToInt = (s: string): number => {
                     result += 400
                     delete hashTable[s[i - 1]];
                 } else {
-                    hashTable[s[i]] += 1
-                    
+                    if (!hashTable[s[i]]) {
+                        hashTable[s[i]] = 1
+                    } else {
+                        hashTable[s[i]] += 1
+                    }
+
                 }
                 break;
             }
@@ -99,7 +120,11 @@ let romanToInt = (s: string): number => {
                     result += 900
                     delete hashTable[s[i - 1]];
                 } else {
-                    hashTable[s[i]] += 1
+                    if (!hashTable[s[i]]) {
+                        hashTable[s[i]] = 1
+                    } else {
+                        hashTable[s[i]] += 1
+                    }
                 }
                 break;
             }
@@ -107,46 +132,46 @@ let romanToInt = (s: string): number => {
         }
 
     }
-    console.log(hashTable,result)
+    // console.log(hashTable,result)
 
     if (hashTable["I"]) {
-        result += hashTable["I"] + 1
+        result += hashTable["I"]
     }
 
 
     if (hashTable["V"]) {
         // console.log("aaaa")
-        result += (hashTable["V"] ) * 5
+        result += (hashTable["V"]) * 5
     }
 
     if (hashTable["X"]) {
-        result += (hashTable["X"] ) * 10
+        result += (hashTable["X"]) * 10
     }
     if (hashTable["L"]) {
         // console.log((hashTable["L"] ) * 50)
-        result += (hashTable["L"] ) * 50
+        result += (hashTable["L"]) * 50
     }
     if (hashTable["C"]) {
-        result += (hashTable["C"] ) * 100
+        result += (hashTable["C"]) * 100
     }
     if (hashTable["D"]) {
-        result += (hashTable["D"] ) * 500
+        result += (hashTable["D"]) * 500
     }
     if (hashTable["M"]) {
-        result += (hashTable["M"] ) * 1000
+        result += (hashTable["M"]) * 1000
     }
-    
+
     return result
 }
 
 
 // Testing
 
-console.log(romanToInt("MCMXCIV")) //1994
-console.log(romanToInt("IV")) //4
-console.log(romanToInt("CMXCIX")) //999
-console.log(romanToInt("MMMCCCXCIX")) //3399
-console.log(romanToInt("XXIX")) //29
+// console.log(romanToInt("MCMXCIV")) //1994
+// console.log(romanToInt("IV")) //4
+// console.log(romanToInt("CMXCIX")) //999
+// console.log(romanToInt("MMMCCCXCIX")) //3399
+// console.log(romanToInt("XXIX")) //29
 
-// console.log(romanToInt("LVIII")) //58
+console.log(romanToInt("LVIII")) //58
 // console.log(romanToInt("III")) //3
