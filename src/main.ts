@@ -1,107 +1,52 @@
 let romanToInt = (s: string): number => {
     let result: number = 0;
     const hashTable: { [key: string]: number } = {};
-    const addToTheHash = (i:number) => {
+    const addToTheHash = (i: number) => {
         if (!hashTable[s[i]]) {
             hashTable[s[i]] = 1
         } else {
             hashTable[s[i]] += 1
         }
     }
-
-    for (let i: number = 0; i < s.length; i++) {
-
-        switch (s[i]) {
-
-            case "I": {
-                addToTheHash(i)
-                break;
-            }
-
-            case "V": {
-                if (s[i - 1] == "I") {
-                    result += 4
-                    delete hashTable[s[i - 1]];
-                } else {
-                    addToTheHash(i)
-                }
-                break;
-            }
-
-            case "X": {
-                if (s[i - 1] == "I") {
-                    result += 9
-                    delete hashTable[s[i - 1]];
-                } else {
-                    addToTheHash(i)
-                }
-                break;
-            }
-
-            case "L": {
-                if (s[i - 1] == "X") {
-                    result += 40
-                    delete hashTable[s[i - 1]];
-                } else {
-                    addToTheHash(i)
-                }
-                break;
-            }
-
-            case "C": {
-                if (s[i - 1] == "X") {
-                    result += 90
-                    delete hashTable[s[i - 1]];
-                } else {
-                    addToTheHash(i)
-                }
-                break;
-            }
-
-            case "D": {
-                if (s[i - 1] == "C") {
-                    result += 400
-                    delete hashTable[s[i - 1]];
-                } else {
-                    addToTheHash(i)
-                }
-                break;
-            }
-
-            case "M": {
-                if (s[i - 1] == "C") {
-                    result += 900
-                    delete hashTable[s[i - 1]];
-                } else {
-                    addToTheHash(i)
-                }
-                break;
-            }
+    const checkLetter = (letter: string, add: number, i: number) => {
+        if (s[i - 1] == letter) {
+            result += add
+            delete hashTable[s[i - 1]];
+        } else {
+            addToTheHash(i)
         }
     }
 
-    if (hashTable["I"]) {
-        result += hashTable["I"]
-    }
-    if (hashTable["V"]) {
-        result += (hashTable["V"]) * 5
+    const sumNumbersInHash = (letter: string, value: number = 1) => {
+        if (hashTable[letter]) {
+            result += hashTable[letter] * value
+        }
     }
 
-    if (hashTable["X"]) {
-        result += (hashTable["X"]) * 10
+    for (let i: number = 0; i < s.length; i++) {
+        if (s[i] == "I") {
+            addToTheHash(i)
+        } else if (s[i] == "V") {
+            checkLetter("I", 4, i)
+        } else if (s[i] == "X") {
+            checkLetter("I", 9, i)
+        } else if (s[i] == "L") {
+            checkLetter("X", 40, i)
+        } else if (s[i] == "C") {
+            checkLetter("X", 90, i)
+        } else if (s[i] == "D") {
+            checkLetter("C", 400, i)
+        } else if (s[i] == "M") {
+            checkLetter("C", 900, i)
+        }
     }
-    if (hashTable["L"]) {
-        result += (hashTable["L"]) * 50
-    }
-    if (hashTable["C"]) {
-        result += (hashTable["C"]) * 100
-    }
-    if (hashTable["D"]) {
-        result += (hashTable["D"]) * 500
-    }
-    if (hashTable["M"]) {
-        result += (hashTable["M"]) * 1000
-    }
+    sumNumbersInHash("I")
+    sumNumbersInHash("V", 5)
+    sumNumbersInHash("X", 10)
+    sumNumbersInHash("L", 50)
+    sumNumbersInHash("C", 100)
+    sumNumbersInHash("D", 500)
+    sumNumbersInHash("M", 1000)
 
     return result
 }
@@ -109,10 +54,10 @@ let romanToInt = (s: string): number => {
 
 // Testing
 
-// console.log(romanToInt("MCMXCIV")) //1994
-// console.log(romanToInt("IV")) //4
-// console.log(romanToInt("CMXCIX")) //999
-// console.log(romanToInt("MMMCCCXCIX")) //3399
-// console.log(romanToInt("XXIX")) //29
-// console.log(romanToInt("LVIII")) //58
-// console.log(romanToInt("III")) //3
+console.log(romanToInt("MCMXCIV")) //1994
+console.log(romanToInt("IV")) //4
+console.log(romanToInt("CMXCIX")) //999
+console.log(romanToInt("MMMCCCXCIX")) //3399
+console.log(romanToInt("XXIX")) //29
+console.log(romanToInt("LVIII")) //58
+console.log(romanToInt("III")) //3
