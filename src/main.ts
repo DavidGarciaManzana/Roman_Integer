@@ -16,7 +16,7 @@
 // X can be placed before L (50) and C (100) to make 40 and 90. 
 // C can be placed before D (500) and M (1000) to make 400 and 900.
 // Given a roman numeral, convert it to an integer.
- 
+
 
 // Constraints:
 
@@ -25,12 +25,128 @@
 // It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 
 
-function romanToInt(s: string): number {
 
-};
+
+let romanToInt = (s: string): number => {
+    const hashTable: { [key: string]: number } = {};
+    let result: number = 0;
+    for (let i: number = 0; i < s.length; i++) {
+        if (i == 0) {
+            hashTable[s[i]] = 0
+            // console.log(hashTable)
+        }
+
+        switch (s[i]) {
+
+            case "I": {
+                break;
+            }
+            case "V": {
+                if (s[i - 1] == "I") {
+                    result += 4
+                    delete hashTable[s[i - 1]];
+                } else {
+                    hashTable[s[i]] += 1
+                }
+                break;
+            }
+            case "X": {
+                if (s[i - 1] == "I") {
+                    result += 9
+                    delete hashTable[s[i - 1]];
+                } else {
+                    hashTable[s[i]] += 1
+                    // console.log(hashTable)
+                }
+                break;
+            }
+            case "L": {
+                if (s[i - 1] == "X") {
+                    result += 40
+                    delete hashTable[s[i - 1]];
+                } else {
+                    hashTable[s[i]] += 1
+                }
+                break;
+            }
+            case "C": {
+                if (s[i - 1] == "X") {
+                    result += 90
+                    delete hashTable[s[i - 1]];
+                } else {
+                    if(!hashTable[s[i]]){
+                        hashTable[s[i]] = 1
+                    } else {
+                        hashTable[s[i]] += 1
+                    }
+                    
+                    console.log(hashTable)
+                }
+                break;
+            }
+            case "D": {
+                if (s[i - 1] == "C") {
+                    result += 400
+                    delete hashTable[s[i - 1]];
+                } else {
+                    hashTable[s[i]] += 1
+                    
+                }
+                break;
+            }
+            case "M": {
+                if (s[i - 1] == "C") {
+                    result += 900
+                    delete hashTable[s[i - 1]];
+                } else {
+                    hashTable[s[i]] += 1
+                }
+                break;
+            }
+
+        }
+
+    }
+    console.log(hashTable,result)
+
+    if (hashTable["I"]) {
+        result += hashTable["I"] + 1
+    }
+
+
+    if (hashTable["V"]) {
+        // console.log("aaaa")
+        result += (hashTable["V"] ) * 5
+    }
+
+    if (hashTable["X"]) {
+        result += (hashTable["X"] ) * 10
+    }
+    if (hashTable["L"]) {
+        // console.log((hashTable["L"] ) * 50)
+        result += (hashTable["L"] ) * 50
+    }
+    if (hashTable["C"]) {
+        result += (hashTable["C"] ) * 100
+    }
+    if (hashTable["D"]) {
+        result += (hashTable["D"] ) * 500
+    }
+    if (hashTable["M"]) {
+        result += (hashTable["M"] ) * 1000
+    }
+    
+    return result
+}
 
 
 // Testing
-console.log(romanToInt("III")) //3
-console.log(romanToInt("LVIII")) //58
+
 console.log(romanToInt("MCMXCIV")) //1994
+console.log(romanToInt("IV")) //4
+console.log(romanToInt("CMXCIX")) //999
+console.log(romanToInt("MMMCCCXCIX")) //3399
+console.log(romanToInt("XXIX")) //29
+
+// console.log(romanToInt("LVIII")) //58
+// console.log(romanToInt("III")) //3
