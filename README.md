@@ -35,6 +35,8 @@ tsc --wacth
 ## Acknowledgements
 
  - [Roman to Integer - Leetcode](https://leetcode.com/problems/roman-to-integer/description/)
+ 
+ ## Leetcode Performance
 
 <p align="center">
   <img src="img/Leetcode1.png" alt="Performance" title="Performance Chart">
