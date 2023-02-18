@@ -54,10 +54,10 @@ let romanToInt = (s: string): number => {
 
 // Testing
 
-console.log(romanToInt("MCMXCIV")) //1994
-console.log(romanToInt("IV")) //4
-console.log(romanToInt("CMXCIX")) //999
-console.log(romanToInt("MMMCCCXCIX")) //3399
-console.log(romanToInt("XXIX")) //29
-console.log(romanToInt("LVIII")) //58
-console.log(romanToInt("III")) //3
+// console.log(romanToInt("MCMXCIV")) //1994
+// console.log(romanToInt("IV")) //4
+// console.log(romanToInt("CMXCIX")) //999
+// console.log(romanToInt("MMMCCCXCIX")) //3399
+// console.log(romanToInt("XXIX")) //29
+// console.log(romanToInt("LVIII")) //58
+// console.log(romanToInt("III")) //3
